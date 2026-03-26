@@ -3,7 +3,7 @@
 Hooks are event-driven automations that fire before or after GitHub Copilot tool executions. They enforce code quality, catch mistakes early, and automate repetitive checks — without requiring manual intervention.
 
 ```
-hooks/
+.github/hooks/
 ├── hooks.json          ← Hook configuration (registered in plugin.json)
 ├── README.md
 └── scripts/
@@ -29,18 +29,18 @@ All hooks are shell scripts that receive context via environment variables and e
 
 ---
 
-## Hook Configuration (`hooks/hooks.json`)
+## Hook Configuration (`.github/hooks/hooks.json`)
 
 ```json
 {
   "hooks": {
     "preToolCall": [
-      { "matcher": "terminal",   "command": "pre-terminal-guard.sh" },
-      { "matcher": "github",     "command": "pre-push-reminder.sh"  }
+      { "matcher": "terminal",  "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/pre-terminal-guard.sh\"" },
+      { "matcher": "github",    "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/pre-push-reminder.sh\"" }
     ],
     "postToolCall": [
-      { "matcher": "editFiles",  "command": "post-edit-format.sh",  "async": true, "timeout": 30 },
-      { "matcher": "editFiles",  "command": "typecheck.sh",         "async": true, "timeout": 30 }
+      { "matcher": "editFiles", "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/post-edit-format.sh\"", "async": true, "timeout": 30 },
+      { "matcher": "editFiles", "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/typecheck.sh\"",        "async": true, "timeout": 30 }
     ]
   }
 }
@@ -145,7 +145,7 @@ After Copilot edits a `.ts` or `.tsx` file, runs `tsc --noEmit` to check for Typ
 | **Trigger** | Not currently auto-wired (example lifecycle script) |
 | **Behavior** | Injects project context when run manually or by a future session-start hook |
 
-This script is not registered in `hooks/hooks.json` and does **not** run automatically. It is provided as an example of a session-start script you can call manually (for example, from your shell or editor) or wire up yourself if your environment adds support for session-start lifecycle hooks.
+This script is not registered in `.github/hooks/hooks.json` and does **not** run automatically. It is provided as an example of a session-start script you can call manually (for example, from your shell or editor) or wire up yourself if your environment adds support for session-start lifecycle hooks.
 
 When run, it detects and reports the project's technology stack so Copilot has accurate context from the first message.
 

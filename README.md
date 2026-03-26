@@ -22,39 +22,44 @@ All components live inside `.github/` so the plugin works in two modes without a
 
 ## Installation
 
-### Option A — Plugin (recommended)
+### Option A — Copilot CLI plugin (recommended)
 
-Reference this repository as a Copilot plugin in your Copilot configuration:
+Install directly from within the Copilot CLI using the `/plugin` command:
 
-```json
-{
-  "plugins": [
-    "https://github.com/your-org/copilot-ts-react-plugin"
-  ]
-}
+```
+/plugin add https://github.com/your-org/copilot-ts-react-plugin
 ```
 
-Copilot loads `plugin.json` and activates all components automatically.
+Copilot CLI reads `.github/plugin/plugin.json` from the repo, then loads all agents, skills, instructions, hooks, and MCP servers automatically. No file copying required.
+
+> **Verify it loaded:** run `/agent` to see the 7 custom agents, `/skills list` to see the 4 skills, and `/instructions` to confirm instruction files are active.
 
 ### Option B — Copy to project
 
 Copy the `.github/` folder from this repo into your project's root:
 
+```bash
+# Clone the plugin repo and copy its .github/ folder into your project
+cp -r /path/to/copilot-ts-react-plugin/.github/. your-project/.github/
+```
+
+Result:
+
 ```
 your-project/
-└── .github/           ← copy the entire .github/ folder here
-    ├── agents/
+└── .github/
+    ├── agents/              ← auto-discovered by Copilot CLI
     ├── hooks/
-    ├── instructions/
-    ├── skills/
+    ├── instructions/        ← auto-discovered (*.instructions.md)
+    ├── skills/              ← auto-discovered by Copilot CLI
     ├── .mcp.json
     └── plugin/
-        └── plugin.json
+        └── plugin.json      ← loads hooks + MCP via manifest
 ```
 
-All features activate automatically — agents, skills, instructions, hooks, and MCP servers are discovered from the `.github/` folder. No additional configuration needed.
+All features activate automatically — no additional configuration needed.
 
-> **Note:** In copy mode, if Copilot does not auto-load MCP via `plugin.json`, also copy `.github/.mcp.json` to your project root as `.mcp.json`.
+> **MCP fallback:** if MCP servers don't load via `plugin.json`, copy `.github/.mcp.json` to your project root as `.mcp.json` (Copilot CLI also auto-loads from the project root).
 
 ---
 

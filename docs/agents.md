@@ -1,6 +1,6 @@
 # Agents
 
-This plugin ships **7 specialized agents** that GitHub Copilot can invoke automatically or on demand. All agents are defined in the `agents/` directory and registered in `.github/plugin/plugin.json`.
+This plugin ships **7 specialized agents** that GitHub Copilot can invoke automatically or on demand. All agents are defined in the `.github/agents/` directory and registered in `.github/plugin/plugin.json`.
 
 ---
 
@@ -9,7 +9,7 @@ This plugin ships **7 specialized agents** that GitHub Copilot can invoke automa
 Agents are Markdown files with YAML frontmatter that define a custom AI persona with a specific role, toolset, and model. Copilot selects agents automatically based on task context, or you can invoke them explicitly by name.
 
 ```
-agents/
+.github/agents/
 ├── architect.agent.md
 ├── code-reviewer.agent.md
 ├── doc-updater.agent.md
@@ -27,7 +27,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/architect.agent.md` |
+| **File** | `.github/agents/architect.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase` |
 | **Activation** | Proactive — planning new features, refactoring large systems, or making architectural decisions |
@@ -49,7 +49,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/code-reviewer.agent.md` |
+| **File** | `.github/agents/code-reviewer.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase`, `terminal` |
 | **Activation** | Proactive — immediately after writing or modifying any code. **MUST BE USED for all code changes.** |
@@ -72,7 +72,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/doc-updater.agent.md` |
+| **File** | `.github/agents/doc-updater.agent.md` |
 | **Model** | `gpt-4o-mini` |
 | **Tools** | `codebase`, `editFiles`, `terminal` |
 | **Activation** | Proactive — for updating codemaps, READMEs, and documentation guides |
@@ -92,7 +92,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/planner.agent.md` |
+| **File** | `.github/agents/planner.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase` |
 | **Activation** | Proactive — when implementing features, architectural changes, or complex refactoring |
@@ -113,7 +113,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/refactor-cleaner.agent.md` |
+| **File** | `.github/agents/refactor-cleaner.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase`, `editFiles`, `terminal` |
 | **Activation** | Proactive — for removing unused code, duplicates, and refactoring |
@@ -135,7 +135,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/security-reviewer.agent.md` |
+| **File** | `.github/agents/security-reviewer.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase`, `editFiles`, `terminal` |
 | **Activation** | Proactive — after writing code handling user input, authentication, API endpoints, or sensitive data |
@@ -160,7 +160,7 @@ agents/
 
 | Field | Value |
 |-------|-------|
-| **File** | `agents/tdd-guide.agent.md` |
+| **File** | `.github/agents/tdd-guide.agent.md` |
 | **Model** | `gpt-4o` |
 | **Tools** | `codebase`, `editFiles`, `terminal` |
 | **Activation** | Proactive — when writing new features, fixing bugs, or refactoring code |

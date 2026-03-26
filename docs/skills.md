@@ -2,10 +2,10 @@
 
 Skills are reusable knowledge modules that Copilot activates when it detects matching context in your prompts. They provide structured guidance, patterns, and checklists for specific development workflows.
 
-Skills are defined in the `skills/` directory as `SKILL.md` files and registered in `.github/plugin/plugin.json`.
+Skills are defined in the `.github/skills/` directory as `SKILL.md` files and registered in `.github/plugin/plugin.json`.
 
 ```
-skills/
+.github/skills/
 ├── frontend-patterns/
 │   └── SKILL.md
 ├── security-review/
@@ -37,7 +37,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 
 | Field | Value |
 |-------|-------|
-| **File** | `skills/frontend-patterns/SKILL.md` |
+| **File** | `.github/skills/frontend-patterns/SKILL.md` |
 | **Version** | `1.0.0` |
 | **Triggers** | `react component`, `state management`, `performance optimization`, `custom hook`, `form validation` |
 
@@ -68,7 +68,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 
 | Field | Value |
 |-------|-------|
-| **File** | `skills/security-review/SKILL.md` |
+| **File** | `.github/skills/security-review/SKILL.md` |
 | **Origin** | ECC |
 
 **Purpose:** Comprehensive security checklist and patterns for secure coding. Activated when working with authentication, user input, API endpoints, secrets, or sensitive features.
@@ -95,7 +95,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 - Implementing payment features
 - Storing or transmitting sensitive data
 
-**Supporting File:** `skills/security-review/cloud-infrastructure-security.md` — extended guidance for cloud infrastructure security (IAM, network policies, secrets in CI/CD).
+**Supporting File:** `.github/skills/security-review/cloud-infrastructure-security.md` — extended guidance for cloud infrastructure security (IAM, network policies, secrets in CI/CD).
 
 ---
 
@@ -103,7 +103,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 
 | Field | Value |
 |-------|-------|
-| **File** | `skills/security-scan/SKILL.md` |
+| **File** | `.github/skills/security-scan/SKILL.md` |
 | **Origin** | ECC |
 
 **Purpose:** Audits the Copilot/Claude Code plugin configuration itself for security vulnerabilities, misconfigurations, and injection risks using **AgentShield**.
@@ -115,8 +115,8 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 | `CLAUDE.md` / plugin instructions | Hardcoded secrets, auto-run instructions, prompt injection patterns |
 | `settings.json` | Overly permissive allow lists, missing deny lists, dangerous bypass flags |
 | `mcp.json` / `.mcp.json` | Risky MCP servers, hardcoded env secrets, `npx` supply chain risks |
-| `hooks/` scripts | Command injection via interpolation, data exfiltration, silent error suppression |
-| `agents/*.md` | Unrestricted tool access, prompt injection surface, missing model specs |
+| `.github/hooks/` scripts | Command injection via interpolation, data exfiltration, silent error suppression |
+| `.github/agents/*.md` | Unrestricted tool access, prompt injection surface, missing model specs |
 
 **When to Run:**
 - Setting up a new project
@@ -132,7 +132,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 
 | Field | Value |
 |-------|-------|
-| **File** | `skills/tdd-workflow/SKILL.md` |
+| **File** | `.github/skills/tdd-workflow/SKILL.md` |
 | **Origin** | ECC |
 
 **Purpose:** Enforces test-driven development with 80%+ coverage including unit, integration, and E2E tests.

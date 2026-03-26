@@ -5,23 +5,23 @@ Instructions are Markdown files that are automatically injected into every Copil
 Instructions are organized into two categories and registered in `.github/plugin/plugin.json`.
 
 ```
-instructions/
+.github/instructions/
 ├── common/             ← Apply to all file types (applyTo: "**")
-│   ├── agents.md
-│   ├── coding-style.md
-│   ├── development-workflow.md
-│   ├── git-workflow.md
-│   ├── hooks.md
-│   ├── patterns.md
-│   ├── performance.md
-│   ├── security.md
-│   └── testing.md
+│   ├── agents.instructions.md
+│   ├── coding-style.instructions.md
+│   ├── development-workflow.instructions.md
+│   ├── git-workflow.instructions.md
+│   ├── hooks.instructions.md
+│   ├── patterns.instructions.md
+│   ├── performance.instructions.md
+│   ├── security.instructions.md
+│   └── testing.instructions.md
 └── typescript/         ← Apply to JS/TS files only (applyTo: "**/*.{ts,tsx,js,jsx}")
-    ├── coding-style.md
-    ├── hooks.md
-    ├── patterns.md
-    ├── security.md
-    └── testing.md
+    ├── coding-style.instructions.md
+    ├── hooks.instructions.md
+    ├── patterns.instructions.md
+    ├── security.instructions.md
+    └── testing.instructions.md
 ```
 
 ---
@@ -39,7 +39,7 @@ TypeScript instructions extend their common counterparts and add language-specif
 
 ## Common Instructions
 
-### `agents.md`
+### `agents.instructions.md`
 
 `applyTo: "**"`
 
@@ -59,7 +59,7 @@ Also covers multi-agent orchestration patterns — how to chain agents sequentia
 
 ---
 
-### `coding-style.md`
+### `coding-style.instructions.md`
 
 `applyTo: "**"`
 
@@ -78,7 +78,7 @@ Defines universal coding style rules applied regardless of language.
 
 ---
 
-### `development-workflow.md`
+### `development-workflow.instructions.md`
 
 `applyTo: "**"`
 
@@ -98,7 +98,7 @@ Defines the full feature development pipeline from research to commit.
 
 ---
 
-### `git-workflow.md`
+### `git-workflow.instructions.md`
 
 `applyTo: "**"`
 
@@ -123,7 +123,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 
 ---
 
-### `hooks.md`
+### `hooks.instructions.md`
 
 `applyTo: "**"`
 
@@ -137,7 +137,7 @@ Documents the hooks system architecture and the hooks available in this plugin. 
 
 ---
 
-### `patterns.md`
+### `patterns.instructions.md`
 
 `applyTo: "**"`
 
@@ -155,7 +155,7 @@ Defines reusable architectural and implementation patterns.
 
 ---
 
-### `performance.md`
+### `performance.instructions.md`
 
 `applyTo: "**"`
 
@@ -176,7 +176,7 @@ Guides model selection and performance optimization strategies.
 
 ---
 
-### `security.md`
+### `security.instructions.md`
 
 `applyTo: "**"`
 
@@ -194,7 +194,7 @@ Defines mandatory security checks that apply before every commit, regardless of 
 
 ---
 
-### `testing.md`
+### `testing.instructions.md`
 
 `applyTo: "**"`
 
@@ -220,9 +220,9 @@ TypeScript instructions extend the common instructions with language-specific ru
 
 ---
 
-### `typescript/coding-style.md`
+### `typescript/coding-style.instructions.md`
 
-Extends `common/coding-style.md`.
+Extends `common/coding-style.instructions.md`.
 
 **TypeScript-Specific Rules:**
 
@@ -237,9 +237,9 @@ Extends `common/coding-style.md`.
 
 ---
 
-### `typescript/hooks.md`
+### `typescript/hooks.instructions.md`
 
-Extends `common/hooks.md`.
+Extends `common/hooks.instructions.md`.
 
 Adds TypeScript-specific hook configurations:
 - **Prettier**: Auto-format JS/TS files after every edit
@@ -248,9 +248,9 @@ Adds TypeScript-specific hook configurations:
 
 ---
 
-### `typescript/patterns.md`
+### `typescript/patterns.instructions.md`
 
-Extends `common/patterns.md`.
+Extends `common/patterns.instructions.md`.
 
 **TypeScript-Specific Patterns:**
 
@@ -264,9 +264,9 @@ Extends `common/patterns.md`.
 
 ---
 
-### `typescript/security.md`
+### `typescript/security.instructions.md`
 
-Extends `common/security.md`.
+Extends `common/security.instructions.md`.
 
 **TypeScript-Specific Security Rules:**
 
@@ -280,9 +280,9 @@ Extends `common/security.md`.
 
 ---
 
-### `typescript/testing.md`
+### `typescript/testing.instructions.md`
 
-Extends `common/testing.md`.
+Extends `common/testing.instructions.md`.
 
 **TypeScript-Specific Testing:**
 
