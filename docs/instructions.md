@@ -51,8 +51,11 @@ Documents the available agents and their intended use cases. Provides Copilot wi
 | `architect` | System design | Architectural decisions |
 | `tdd-guide` | Test-driven development | New features, bug fixes |
 | `code-reviewer` | Code review | After writing code |
+| `security-reviewer` | Security analysis | Before commits |
+| `refactor-cleaner` | Dead code cleanup | Code maintenance |
+| `doc-updater` | Documentation | Updating docs |
 
-Also covers multi-agent orchestration patterns — how to chain agents sequentially for complex tasks.
+Also covers multi-agent orchestration patterns — how to chain agents sequentially or run them in parallel for complex tasks.
 
 ---
 
@@ -86,13 +89,10 @@ Defines the full feature development pipeline from research to commit.
 | Stage | Activity |
 |-------|----------|
 | **0. Research & Reuse** | GitHub code search, web research, check package registries before writing new code |
-| **1. Planning** | Use `planner` agent; create implementation plan with steps and dependencies |
-| **2. Architecture** | Use `architect` agent for non-trivial features |
-| **3. TDD** | Write tests first with `tdd-guide`; maintain 80%+ coverage |
-| **4. Implementation** | Implement code to pass tests |
-| **5. Code Review** | Use `code-reviewer` agent after every change |
-| **6. Security Review** | Use `security-reviewer` for auth, input, API, sensitive data |
-| **7. Git Commit** | Follow git-workflow.md conventions |
+| **1. Plan First** | Use `planner` agent; generate PRD, architecture, system design, tech doc, and task list |
+| **2. TDD** | Write tests first with `tdd-guide`; maintain 80%+ coverage |
+| **3. Code Review** | Use `code-reviewer` agent after every change; address CRITICAL and HIGH issues |
+| **4. Commit & Push** | Follow git-workflow.md conventions for commit messages and PR process |
 
 **Key principle:** Always search for existing implementations (GitHub, npm) before writing new code.
 

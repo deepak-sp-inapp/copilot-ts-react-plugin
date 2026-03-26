@@ -93,7 +93,7 @@ copilot-ts-react-plugin/
 │   ├── instructions.md
 │   └── skills.md
 │
-├── .mcp.json                    ← MCP server configuration (currently empty)
+├── .mcp.json                    ← MCP server configuration (filesystem, memory, sequential-thinking, context7)
 ├── .gitignore
 └── README.md
 ```
@@ -211,19 +211,33 @@ User commits → pre-push-reminder.sh shows staged diff
 
 ## MCP Configuration (`.mcp.json`)
 
-The `.mcp.json` file configures Model Context Protocol servers used by the plugin. It typically lists one or more MCP servers (for tools such as databases, APIs, linters, or custom services) that Copilot can call.
+The `.mcp.json` file configures Model Context Protocol servers used by the plugin. These servers extend Copilot's tool access with persistent memory, filesystem operations, structured reasoning, and live documentation lookup.
 
 ```json
 {
   "mcpServers": {
-    "example-db": {
-      "command": "node",
-      "args": ["./mcp/example-db-server.js"]
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@2026.1.14", "."],
+      "description": "Filesystem access for all agents — reads existing components before generating, writes new files, explores project structure"
     },
-    "example-linter": {
-      "command": "node",
-      "args": ["./mcp/example-linter-server.js"]
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory@2026.1.26"],
+      "description": "Persistent memory — stores React/TypeScript component patterns, naming conventions, and team decisions across sessions"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@2025.12.18"],
+      "description": "Chain-of-thought reasoning — used by planner and architect agents before writing code"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@2.1.4"],
+      "description": "Live documentation lookup — fetches up-to-date React, TypeScript, Vite, Next.js, and ecosystem library docs on demand"
     }
   }
 }
 ```
+
+> **Note:** Keep under 10 MCP servers enabled to preserve the context window. Change the `"."` in the filesystem server args to an absolute path if running Copilot from a different working directory.

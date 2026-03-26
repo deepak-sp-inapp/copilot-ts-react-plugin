@@ -62,7 +62,9 @@ agents/
 3. Applies a confidence-based checklist (only reports issues with >80% certainty)
 4. Reports findings from CRITICAL → LOW severity
 
-**Review Checklist covers:** Correctness, security vulnerabilities, performance, readability, maintainability, test coverage, and TypeScript type safety.
+**Review Checklist covers:** Correctness, security vulnerabilities (CRITICAL), React/Next.js patterns (HIGH), Node.js/backend patterns (HIGH), performance, readability, maintainability, test coverage, and TypeScript type safety. Issues are only reported with >80% confidence.
+
+**v1.8 Addendum:** When reviewing AI-generated changes, additionally prioritizes behavioral regressions, security trust boundaries, hidden coupling, and cost-awareness (flags unnecessary escalation to higher-cost models).
 
 ---
 
@@ -98,13 +100,12 @@ agents/
 **Purpose:** Expert planning specialist creating comprehensive, actionable implementation plans.
 
 **Planning Process:**
-1. **Requirements Analysis** — Clarifies scope, identifies unknowns
-2. **Codebase Analysis** — Explores existing patterns and relevant code
-3. **Research** — Uses GitHub code search and web research for prior art
-4. **Plan Generation** — Produces step-by-step implementation plan with dependencies
-5. **Risk Assessment** — Identifies potential blockers and edge cases
+1. **Requirements Analysis** — Clarifies scope, identifies unknowns, lists assumptions and constraints
+2. **Architecture Review** — Explores existing codebase structure, identifies affected components, reviews similar implementations
+3. **Step Breakdown** — Creates detailed steps with file paths, dependencies, estimated complexity, and risk level
+4. **Implementation Order** — Prioritizes by dependencies, groups related changes, enables incremental testing
 
-**Key Outputs:** Numbered implementation steps, dependency ordering, risk flags, test strategy outline.
+**Key Outputs:** Phased implementation plan with numbered steps (including file paths), testing strategy, risk mitigations, and success criteria. Large features are split into independently deliverable phases (MVP → Core → Edge Cases → Optimization).
 
 ---
 
@@ -119,7 +120,7 @@ agents/
 
 **Purpose:** Dead code cleanup and consolidation specialist.
 
-**Detection Tools Used:** `knip`, `depcheck`, `ts-prune`
+**Detection Tools Used:** `knip`, `depcheck`, `ts-prune`, `eslint --report-unused-disable-directives`
 
 **Responsibilities:**
 - Detect unused exports, variables, imports, and files
@@ -148,8 +149,10 @@ agents/
 - XSS and CSRF vulnerabilities
 - Server-Side Request Forgery (SSRF)
 - Unsafe cryptography
-- Insecure dependencies (`npm audit`)
+- Insecure dependencies (`npm audit --audit-level=high`)
 - Missing rate limiting and authentication checks
+
+**Analysis Commands:** `npm audit --audit-level=high`, `npx eslint . --plugin security`
 
 ---
 
@@ -172,6 +175,8 @@ agents/
 **Coverage Requirement:** Minimum **80%** test coverage across unit, integration, and E2E tests.
 
 **Test Stack:** Vitest + React Testing Library (unit/integration), Playwright (E2E).
+
+**v1.8 Eval-Driven Addendum:** For release-critical paths, integrates eval-driven development — defines capability and regression evals before implementation, runs baseline, implements minimum passing change, re-runs and reports pass@1 and pass@3 stability.
 
 ---
 
