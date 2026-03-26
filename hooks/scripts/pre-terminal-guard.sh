@@ -31,9 +31,9 @@ DESTRUCTIVE_PATTERNS=(
 
 for pattern in "${DESTRUCTIVE_PATTERNS[@]}"; do
   if echo "$COMMAND" | grep -qi "$pattern"; then
-    echo "⚠️  WARNING: Potentially destructive command detected: '$pattern'"
-    echo "   Command: $COMMAND"
-    echo "   Review carefully before proceeding."
+    echo "⚠️  WARNING: Potentially destructive command detected: '$pattern'" >&2
+    echo "   Command: $COMMAND" >&2
+    echo "   Review carefully before proceeding." >&2
     break
   fi
 done
