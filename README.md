@@ -2,6 +2,10 @@
 
 A **GitHub Copilot plugin** that enhances Copilot for React TypeScript development. It adds specialized agents, contextual skills, automated hooks, and persistent coding instructions — all wired together through a single plugin manifest.
 
+All components live inside `.github/` so the plugin works in two modes without any reconfiguration:
+- **Plugin mode** — reference this repository as a Copilot plugin
+- **Copy mode** — paste the `.github/` folder into any project and everything activates automatically
+
 ---
 
 ## What's Inside
@@ -12,14 +16,15 @@ A **GitHub Copilot plugin** that enhances Copilot for React TypeScript developme
 | [Skills](docs/skills.md) | 4 | Context-aware knowledge modules (frontend patterns, TDD workflow, security) |
 | [Hooks](docs/hooks.md) | 5 scripts | Automated pre/post tool-call actions (format, typecheck, safety guards) |
 | [Instructions](docs/instructions.md) | 14 files | Always-on rules for coding style, security, testing, git workflow |
+| MCP | 4 servers | filesystem, memory, sequential-thinking, context7 |
 
 ---
 
-## Quick Start
+## Installation
 
-### 1. Install the plugin
+### Option A — Plugin (recommended)
 
-Add this repository as a Copilot plugin by referencing it in your Copilot configuration:
+Reference this repository as a Copilot plugin in your Copilot configuration:
 
 ```json
 {
@@ -29,32 +34,38 @@ Add this repository as a Copilot plugin by referencing it in your Copilot config
 }
 ```
 
-Or clone locally and point your config to the local path.
+Copilot loads `plugin.json` and activates all components automatically.
 
-### 2. Verify registration
+### Option B — Copy to project
 
-Check `.github/plugin/plugin.json` — it is the single manifest that registers all components:
+Copy the `.github/` folder from this repo into your project's root:
 
-```json
-{
-  "name": "copilot-ts-react-plugin",
-  "version": "1.0.0",
-  "components": {
-    "instructions": [ "..." ],
-    "agents":       [ "..." ],
-    "skills":       [ "..." ],
-    "hooks":        "hooks/hooks.json"
-  }
-}
+```
+your-project/
+└── .github/           ← copy the entire .github/ folder here
+    ├── agents/
+    ├── hooks/
+    ├── instructions/
+    ├── skills/
+    ├── .mcp.json
+    └── plugin/
+        └── plugin.json
 ```
 
-### 3. Start working
+All features activate automatically — agents, skills, instructions, hooks, and MCP servers are discovered from the `.github/` folder. No additional configuration needed.
+
+> **Note:** In copy mode, if Copilot does not auto-load MCP via `plugin.json`, also copy `.github/.mcp.json` to your project root as `.mcp.json`.
+
+---
+
+## How It Works
 
 Once loaded, the plugin activates automatically:
-- **Instructions** are injected into every conversation
+- **Instructions** are injected into every conversation (via `plugin.json` + auto-discovery of `*.instructions.md`)
 - **Agents** activate based on task context (or invoke by name)
 - **Skills** activate when trigger phrases appear in your prompt
 - **Hooks** run silently in the background on every file edit or terminal command
+- **MCP servers** extend tool access with memory, filesystem, reasoning, and live docs
 
 ---
 
@@ -115,6 +126,8 @@ Fourteen instruction files defining persistent rules across two scopes:
 
 **TypeScript** (`.ts`, `.tsx`, `.js`, `.jsx`): extends all common rules with TS-specific types, strict null checks, Zod validation, Playwright E2E, and secure environment variable handling.
 
+All files use the `.instructions.md` extension for automatic Copilot discovery.
+
 → [Full instructions documentation](docs/instructions.md)
 
 ---
@@ -123,14 +136,17 @@ Fourteen instruction files defining persistent rules across two scopes:
 
 ```
 copilot-ts-react-plugin/
-├── .github/plugin/plugin.json   ← Plugin manifest
-├── agents/                      ← 7 agent definitions
-├── skills/                      ← 4 skill modules
-├── hooks/                       ← Hook config + 5 scripts
-├── instructions/
-│   ├── common/                  ← 9 universal instruction files
-│   └── typescript/              ← 5 TypeScript-specific instruction files
-└── docs/                        ← This documentation
+├── .github/
+│   ├── plugin/
+│   │   └── plugin.json          ← Plugin manifest (registers all components)
+│   ├── agents/                  ← 7 agent definitions
+│   ├── skills/                  ← 4 skill modules
+│   ├── hooks/                   ← Hook config + 5 scripts
+│   ├── instructions/
+│   │   ├── common/              ← 9 universal instruction files (*.instructions.md)
+│   │   └── typescript/          ← 5 TypeScript-specific instruction files (*.instructions.md)
+│   └── .mcp.json                ← MCP server configuration
+└── docs/                        ← Documentation (not copied to projects)
     ├── agents.md
     ├── architecture.md
     ├── hooks.md
@@ -163,7 +179,7 @@ Research → Plan → TDD → Implement → Code Review → Security Review → 
 
 | Document | Description |
 |----------|-------------|
-| [docs/architecture.md](docs/architecture.md) | Plugin structure, data flow, component interaction |
+| [docs/architecture.md](docs/architecture.md) | Plugin structure, dual-mode operation, data flow |
 | [docs/agents.md](docs/agents.md) | All 7 agents — purpose, tools, activation, outputs |
 | [docs/skills.md](docs/skills.md) | All 4 skills — triggers, checklists, patterns |
 | [docs/hooks.md](docs/hooks.md) | All hooks — scripts, exit codes, custom hook guide |

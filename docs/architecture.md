@@ -32,71 +32,93 @@ The plugin is a **GitHub Copilot extension** that enhances Copilot's behavior wh
 
 ## Repository Structure
 
+All components live inside `.github/` so that the repository works identically whether
+installed as a Copilot plugin **or** copied directly into a project's `.github/` folder.
+
 ```
 copilot-ts-react-plugin/
 │
 ├── .github/
-│   └── plugin/
-│       └── plugin.json          ← Plugin manifest; registers all components
+│   ├── plugin/
+│   │   └── plugin.json              ← Plugin manifest; registers all components
+│   │
+│   ├── agents/                      ← 7 specialized AI agent personas
+│   │   ├── architect.agent.md
+│   │   ├── code-reviewer.agent.md
+│   │   ├── doc-updater.agent.md
+│   │   ├── planner.agent.md
+│   │   ├── refactor-cleaner.agent.md
+│   │   ├── security-reviewer.agent.md
+│   │   └── tdd-guide.agent.md
+│   │
+│   ├── skills/                      ← 4 reusable knowledge modules
+│   │   ├── frontend-patterns/
+│   │   │   └── SKILL.md
+│   │   ├── security-review/
+│   │   │   ├── SKILL.md
+│   │   │   └── cloud-infrastructure-security.md
+│   │   ├── security-scan/
+│   │   │   └── SKILL.md
+│   │   └── tdd-workflow/
+│   │       └── SKILL.md
+│   │
+│   ├── hooks/                       ← Event-driven automations
+│   │   ├── hooks.json               ← Hook configuration
+│   │   └── scripts/
+│   │       ├── post-edit-format.sh
+│   │       ├── pre-push-reminder.sh
+│   │       ├── pre-terminal-guard.sh
+│   │       ├── session-context.sh
+│   │       └── typecheck.sh
+│   │
+│   ├── instructions/                ← Persistent rules injected into all conversations
+│   │   ├── README.md
+│   │   ├── common/                  ← Apply to all files (applyTo: "**")
+│   │   │   ├── agents.instructions.md
+│   │   │   ├── coding-style.instructions.md
+│   │   │   ├── development-workflow.instructions.md
+│   │   │   ├── git-workflow.instructions.md
+│   │   │   ├── hooks.instructions.md
+│   │   │   ├── patterns.instructions.md
+│   │   │   ├── performance.instructions.md
+│   │   │   ├── security.instructions.md
+│   │   │   └── testing.instructions.md
+│   │   └── typescript/              ← Apply to JS/TS files (applyTo: "**/*.{ts,tsx,js,jsx}")
+│   │       ├── coding-style.instructions.md
+│   │       ├── hooks.instructions.md
+│   │       ├── patterns.instructions.md
+│   │       ├── security.instructions.md
+│   │       └── testing.instructions.md
+│   │
+│   └── .mcp.json                    ← MCP server configuration
 │
-├── agents/                      ← 7 specialized AI agent personas
-│   ├── architect.agent.md
-│   ├── code-reviewer.agent.md
-│   ├── doc-updater.agent.md
-│   ├── planner.agent.md
-│   ├── refactor-cleaner.agent.md
-│   ├── security-reviewer.agent.md
-│   └── tdd-guide.agent.md
-│
-├── skills/                      ← 4 reusable knowledge modules
-│   ├── frontend-patterns/
-│   │   └── SKILL.md
-│   ├── security-review/
-│   │   ├── SKILL.md
-│   │   └── cloud-infrastructure-security.md
-│   ├── security-scan/
-│   │   └── SKILL.md
-│   └── tdd-workflow/
-│       └── SKILL.md
-│
-├── hooks/                       ← Event-driven automations
-│   ├── hooks.json               ← Hook configuration
-│   └── scripts/
-│       ├── post-edit-format.sh
-│       ├── pre-push-reminder.sh
-│       ├── pre-terminal-guard.sh
-│       ├── session-context.sh
-│       └── typecheck.sh
-│
-├── instructions/                ← Persistent rules injected into all conversations
-│   ├── common/                  ← Apply to all files (applyTo: "**")
-│   │   ├── agents.md
-│   │   ├── coding-style.md
-│   │   ├── development-workflow.md
-│   │   ├── git-workflow.md
-│   │   ├── hooks.md
-│   │   ├── patterns.md
-│   │   ├── performance.md
-│   │   ├── security.md
-│   │   └── testing.md
-│   └── typescript/              ← Apply to JS/TS files (applyTo: "**/*.{ts,tsx,js,jsx}")
-│       ├── coding-style.md
-│       ├── hooks.md
-│       ├── patterns.md
-│       ├── security.md
-│       └── testing.md
-│
-├── docs/                        ← Plugin documentation (this folder)
+├── docs/                            ← Plugin documentation (stays at repo root)
 │   ├── agents.md
 │   ├── architecture.md
 │   ├── hooks.md
 │   ├── instructions.md
 │   └── skills.md
 │
-├── .mcp.json                    ← MCP server configuration (filesystem, memory, sequential-thinking, context7)
 ├── .gitignore
 └── README.md
 ```
+
+---
+
+## Why Everything Lives in `.github/`
+
+This layout enables **dual-mode** operation:
+
+| Mode | How it works |
+|------|-------------|
+| **Plugin** (repo referenced as Copilot plugin) | Copilot loads `plugin.json`; all paths resolve from the plugin repo root (e.g. `.github/agents/architect.agent.md`) |
+| **Copy-to-.github** (folders pasted into a project) | User copies the `.github/` folder into their project; identical paths resolve from the project root ✓ |
+
+In both cases `plugin.json` paths resolve correctly and Copilot auto-discovers:
+- Agents from `.github/agents/*.agent.md`
+- Skills from `.github/skills/*/SKILL.md`
+- Instructions from `.github/instructions/**/*.instructions.md`
+- MCP servers from the `"mcp"` field in `plugin.json`
 
 ---
 
@@ -106,9 +128,10 @@ copilot-ts-react-plugin/
 
 Instructions are the foundation. They are injected automatically into every Copilot conversation and define the baseline rules for coding style, security, testing, git workflow, and agent usage.
 
-- **Common instructions** apply to all files and tasks
+- **Common instructions** apply to all files and tasks (`applyTo: "**"`)
 - **TypeScript instructions** apply only when working with `.ts`/`.tsx`/`.js`/`.jsx` files
 - TypeScript instructions **extend** (not replace) common instructions
+- All instruction files use the `.instructions.md` extension for Copilot auto-discovery
 
 ### Layer 2: Agents (Specialized Personas)
 
@@ -152,6 +175,8 @@ Tool executes
 postToolCall hooks fire (async, non-blocking)
 ```
 
+Script paths in `hooks.json` use `${COPILOT_PLUGIN_ROOT}` which is set to the project/plugin root in both plugin and copy-to-.github modes.
+
 ---
 
 ## Plugin Manifest (`plugin.json`)
@@ -163,10 +188,11 @@ All components are registered in `.github/plugin/plugin.json`. This is the singl
   "name": "copilot-ts-react-plugin",
   "version": "1.0.0",
   "components": {
-    "instructions": [ "...all instruction files..." ],
-    "agents":       [ "...all agent files..." ],
-    "skills":       [ "...all skill files..." ],
-    "hooks":        "hooks/hooks.json"
+    "instructions": [ "...all .instructions.md files under .github/instructions/..." ],
+    "agents":       [ "...all .agent.md files under .github/agents/..." ],
+    "skills":       [ "...all SKILL.md files under .github/skills/..." ],
+    "hooks":        ".github/hooks/hooks.json",
+    "mcp":          ".github/.mcp.json"
   }
 }
 ```
@@ -209,35 +235,19 @@ User commits → pre-push-reminder.sh shows staged diff
 
 ---
 
-## MCP Configuration (`.mcp.json`)
+## MCP Configuration (`.github/.mcp.json`)
 
-The `.mcp.json` file configures Model Context Protocol servers used by the plugin. These servers extend Copilot's tool access with persistent memory, filesystem operations, structured reasoning, and live documentation lookup.
+The `.github/.mcp.json` file configures Model Context Protocol servers used by the plugin. Referenced via the `"mcp"` field in `plugin.json`, it loads in both plugin mode and copy-to-.github mode.
 
 ```json
 {
   "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem@2026.1.14", "."],
-      "description": "Filesystem access for all agents — reads existing components before generating, writes new files, explores project structure"
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory@2026.1.26"],
-      "description": "Persistent memory — stores React/TypeScript component patterns, naming conventions, and team decisions across sessions"
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@2025.12.18"],
-      "description": "Chain-of-thought reasoning — used by planner and architect agents before writing code"
-    },
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@2.1.4"],
-      "description": "Live documentation lookup — fetches up-to-date React, TypeScript, Vite, Next.js, and ecosystem library docs on demand"
-    }
+    "filesystem":           "Filesystem access — reads existing components before generating",
+    "memory":               "Persistent memory — stores patterns and team decisions across sessions",
+    "sequential-thinking":  "Chain-of-thought reasoning — used by planner and architect agents",
+    "context7":             "Live documentation lookup — React, TypeScript, Vite, Next.js docs"
   }
 }
 ```
 
-> **Note:** Keep under 10 MCP servers enabled to preserve the context window. Change the `"."` in the filesystem server args to an absolute path if running Copilot from a different working directory.
+> **Note:** Keep under 10 MCP servers enabled to preserve the context window.

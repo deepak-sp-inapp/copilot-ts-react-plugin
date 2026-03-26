@@ -4,26 +4,26 @@
       {
         "matcher": "terminal",
         "description": "Warn before potentially destructive shell commands (rm -rf, git force push, etc.)",
-        "command": "bash \"${COPILOT_PLUGIN_ROOT}/hooks/scripts/pre-terminal-guard.sh\""
+        "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/pre-terminal-guard.sh\""
       },
       {
         "matcher": "github",
         "description": "Remind to review staged changes before pushing to remote",
-        "command": "bash \"${COPILOT_PLUGIN_ROOT}/hooks/scripts/pre-push-reminder.sh\""
+        "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/pre-push-reminder.sh\""
       }
     ],
     "postToolCall": [
       {
         "matcher": "editFiles",
         "description": "Auto-format TypeScript and JavaScript files using Prettier after edits",
-        "command": "bash \"${COPILOT_PLUGIN_ROOT}/hooks/scripts/post-edit-format.sh\"",
+        "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/post-edit-format.sh\"",
         "async": true,
         "timeout": 30
       },
       {
         "matcher": "editFiles",
         "description": "Run TypeScript compiler check (tsc --noEmit) after editing .ts/.tsx files",
-        "command": "bash \"${COPILOT_PLUGIN_ROOT}/hooks/scripts/typecheck.sh\"",
+        "command": "bash \"${COPILOT_PLUGIN_ROOT}/.github/hooks/scripts/typecheck.sh\"",
         "async": true,
         "timeout": 30
       }

@@ -4,36 +4,37 @@
   "description": "System-level Frontend Optimization Harness for React TypeScript. Provides custom agents, skills, hooks, and instructions to enhance GitHub Copilot for React development.",
   "components": {
     "instructions": [
-      "instructions/typescript/coding-style.md",
-      "instructions/typescript/hooks.md",
-      "instructions/typescript/patterns.md",
-      "instructions/typescript/security.md",
-      "instructions/typescript/testing.md",
-      "instructions/common/agents.md",
-      "instructions/common/coding-style.md",
-      "instructions/common/development-workflow.md",
-      "instructions/common/git-workflow.md",
-      "instructions/common/hooks.md",
-      "instructions/common/patterns.md",
-      "instructions/common/performance.md",
-      "instructions/common/security.md",
-      "instructions/common/testing.md"
+      ".github/instructions/typescript/coding-style.instructions.md",
+      ".github/instructions/typescript/hooks.instructions.md",
+      ".github/instructions/typescript/patterns.instructions.md",
+      ".github/instructions/typescript/security.instructions.md",
+      ".github/instructions/typescript/testing.instructions.md",
+      ".github/instructions/common/agents.instructions.md",
+      ".github/instructions/common/coding-style.instructions.md",
+      ".github/instructions/common/development-workflow.instructions.md",
+      ".github/instructions/common/git-workflow.instructions.md",
+      ".github/instructions/common/hooks.instructions.md",
+      ".github/instructions/common/patterns.instructions.md",
+      ".github/instructions/common/performance.instructions.md",
+      ".github/instructions/common/security.instructions.md",
+      ".github/instructions/common/testing.instructions.md"
     ],
     "agents": [
-      "agents/architect.agent.md",
-      "agents/code-reviewer.agent.md",
-      "agents/doc-updater.agent.md",
-      "agents/planner.agent.md",
-      "agents/refactor-cleaner.agent.md",
-      "agents/security-reviewer.agent.md",
-      "agents/tdd-guide.agent.md"
+      ".github/agents/architect.agent.md",
+      ".github/agents/code-reviewer.agent.md",
+      ".github/agents/doc-updater.agent.md",
+      ".github/agents/planner.agent.md",
+      ".github/agents/refactor-cleaner.agent.md",
+      ".github/agents/security-reviewer.agent.md",
+      ".github/agents/tdd-guide.agent.md"
     ],
     "skills": [
-      "skills/frontend-patterns/SKILL.md",
-      "skills/security-review/SKILL.md",
-      "skills/security-scan/SKILL.md",
-      "skills/tdd-workflow/SKILL.md"
+      ".github/skills/frontend-patterns/SKILL.md",
+      ".github/skills/security-review/SKILL.md",
+      ".github/skills/security-scan/SKILL.md",
+      ".github/skills/tdd-workflow/SKILL.md"
     ],
-    "hooks": "hooks/hooks.json"
+    "hooks": ".github/hooks/hooks.json",
+    "mcp": ".github/.mcp.json"
   }
 }
