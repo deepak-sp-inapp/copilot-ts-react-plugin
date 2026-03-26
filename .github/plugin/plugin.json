@@ -1,7 +1,7 @@
 {
   "name": "copilot-ts-react-plugin",
   "version": "1.0.0",
-  "description": "System-level Frontend Optimization Harness for React TypeScript with Antd, PrimeReact, and Bootstrap. Provides custom agents, skills, hooks, and instructions to enhance GitHub Copilot for React development.",
+  "description": "System-level Frontend Optimization Harness for React TypeScript. Provides custom agents, skills, hooks, and instructions to enhance GitHub Copilot for React development.",
   "components": {
     "instructions": [
       "instructions/typescript/coding-style.md",

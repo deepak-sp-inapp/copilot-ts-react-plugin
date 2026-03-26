@@ -189,7 +189,7 @@ Example architecture for a React TypeScript frontend project:
 
 ### Current Architecture
 - **Frontend**: Next.js or Vite + React (TypeScript)
-- **UI Libraries**: Ant Design (antd), PrimeReact, Bootstrap
+- **UI Libraries**: Tailwind CSS, shadcn/ui, or custom component library
 - **State Management**: React Context, Zustand, or Redux Toolkit
 - **Data Fetching**: React Query or SWR
 - **Styling**: CSS Modules, Tailwind CSS, or styled-components
@@ -197,7 +197,7 @@ Example architecture for a React TypeScript frontend project:
 
 ### Key Design Decisions
 1. **Component Architecture**: Feature-based folder structure with co-located tests
-2. **UI Consistency**: Shared design system using antd/PrimeReact/Bootstrap components
+2. **UI Consistency**: Shared design system using a consistent component library
 3. **State Strategy**: Server state via React Query, client state via Zustand
 4. **Type Safety**: Strict TypeScript with Zod for runtime validation
 5. **Many Small Files**: High cohesion, low coupling
