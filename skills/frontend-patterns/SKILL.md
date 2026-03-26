@@ -1,7 +1,16 @@
 ---
 name: frontend-patterns
-description: Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.
-origin: ECC
+description: Frontend development patterns for React TypeScript with Antd, PrimeReact, and Bootstrap. Covers component composition, state management, custom hooks, performance optimization, form handling, and accessibility.
+version: "1.0.0"
+triggers:
+  - "react component"
+  - "state management"
+  - "performance optimization"
+  - "custom hook"
+  - "form validation"
+  - "antd"
+  - "primereact"
+  - "bootstrap"
 ---
 
 # Frontend Development Patterns

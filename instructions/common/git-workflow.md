@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 # Git Workflow
 
 ## Commit Message Format
@@ -8,8 +11,6 @@
 ```
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci
-
-Note: Attribution disabled globally via ~/.claude/settings.json.
 
 ## Pull Request Workflow
 

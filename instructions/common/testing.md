@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 # Testing Requirements
 
 ## Minimum Test Coverage: 80%
