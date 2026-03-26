@@ -2,7 +2,7 @@
 name: doc-updater
 description: Documentation and codemap specialist. Use PROACTIVELY for updating codemaps and documentation. Generates docs/CODEMAPS/*, updates READMEs and guides.
 tools: ["codebase", "editFiles", "terminal"]
-model: gpt-4o-mini
+model: claude-haiku-4.5
 ---
 
 # Documentation & Codemap Specialist

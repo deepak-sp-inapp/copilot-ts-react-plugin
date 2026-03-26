@@ -2,7 +2,7 @@
 name: refactor-cleaner
 description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for removing unused code, duplicates, and refactoring. Runs analysis tools (knip, depcheck, ts-prune) to identify dead code and safely removes it.
 tools: ["codebase", "editFiles", "terminal"]
-model: gpt-4o
+model: gpt-5.3-codex
 ---
 
 # Refactor & Dead Code Cleaner
