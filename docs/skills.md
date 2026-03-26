@@ -124,7 +124,7 @@ When a trigger phrase appears in your conversation, Copilot automatically applie
 - Before committing configuration changes
 - Periodic security hygiene
 
-**Tool:** [AgentShield](https://github.com/affaan-m/agentshield) (`pip install insa-its`)
+**Tool:** [AgentShield](https://github.com/affaan-m/agentshield) (`npm install -g ecc-agentshield` or `npx ecc-agentshield ...`)
 
 ---
 
