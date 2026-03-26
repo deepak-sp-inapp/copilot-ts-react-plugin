@@ -101,7 +101,7 @@ Five shell scripts that automate quality checks:
 | `pre-push-reminder.sh` | Before GitHub tool call | Shows staged/unstaged diff summary |
 | `post-edit-format.sh` | After file edit | Auto-formats with Prettier (async) |
 | `typecheck.sh` | After `.ts`/`.tsx` edit | Runs `tsc --noEmit` (async) |
-| `session-context.sh` | Session start | Detects and injects tech stack context |
+| `session-context.sh` | Manual (run at session start) | Detects and injects tech stack context |
 
 → [Full hooks documentation](docs/hooks.md)
 
