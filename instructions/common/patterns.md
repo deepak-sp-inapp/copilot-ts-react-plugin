@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 # Common Patterns
 
 ## Skeleton Projects

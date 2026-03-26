@@ -1,30 +1,30 @@
+---
+applyTo: "**"
+---
 # Hooks System
 
-## Hook Types
+## Copilot Hook Types
 
-- **PreToolUse**: Before tool execution (validation, parameter modification)
-- **PostToolUse**: After tool execution (auto-format, checks)
-- **Stop**: When session ends (final verification)
+- **preToolCall**: Runs before a tool is executed. Use for validation and guardrails.
+- **postToolCall**: Runs after a tool completes. Use for auto-formatting and quality checks.
 
-## Auto-Accept Permissions
+## Available Hooks in This Plugin
 
-Use with caution:
-- Enable for trusted, well-defined plans
-- Disable for exploratory work
-- Never use dangerously-skip-permissions flag
-- Configure `allowedTools` in `~/.claude.json` instead
+| Hook | Trigger | Purpose |
+|------|---------|---------|
+| `pre-terminal-guard.sh` | `preToolCall: terminal` | Warns before destructive shell commands |
+| `pre-push-reminder.sh` | `preToolCall: github` | Reminds to review before pushing |
+| `post-edit-format.sh` | `postToolCall: editFiles` | Auto-formats TS/JS with Prettier |
+| `typecheck.sh` | `postToolCall: editFiles` | Runs `tsc --noEmit` on TypeScript files |
 
-## TodoWrite Best Practices
+## Hook Configuration
 
-Use TodoWrite tool to:
-- Track progress on multi-step tasks
-- Verify understanding of instructions
-- Enable real-time steering
-- Show granular implementation steps
+Hooks are defined in `hooks/hooks.json` relative to the plugin root.
+Copilot passes `COPILOT_TOOL_INPUT_PATH` for file-targeting hooks.
 
-Todo list reveals:
-- Out of order steps
-- Missing items
-- Extra unnecessary items
-- Wrong granularity
-- Misinterpreted requirements
+## Best Practices
+
+- Keep hook scripts fast (< 5 seconds for sync hooks)
+- Use `async: true` for slow operations like type checking
+- Always `exit 0` on non-critical warnings to avoid blocking Copilot
+- Test scripts manually before enabling
