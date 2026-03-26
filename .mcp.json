@@ -27,7 +27,7 @@
     }
   },
   "_comments": {
-    "context_warning": "Keep under 10 MCPs enabled to preserve context window — this config has 6 servers",
+    "context_warning": "Keep under 10 MCPs enabled to preserve context window — this config has 5 servers",
     "filesystem_path": "Change '.' to an absolute path if running Copilot from a different working directory",
     "insaits_prereq": "Run 'pip install insa-its' before enabling the insaits server",
     "excluded": "Vercel, Railway, Cloudflare, Supabase, ClickHouse excluded — backend/infra tools not relevant to this frontend plugin"
