@@ -211,10 +211,19 @@ User commits → pre-push-reminder.sh shows staged diff
 
 ## MCP Configuration (`.mcp.json`)
 
-The `.mcp.json` file configures Model Context Protocol servers. Currently empty — no external MCP servers are configured. Add entries here to connect external tools (databases, APIs, custom tools) to Copilot.
+The `.mcp.json` file configures Model Context Protocol servers used by the plugin. It typically lists one or more MCP servers (for tools such as databases, APIs, linters, or custom services) that Copilot can call.
 
 ```json
 {
-  "mcpServers": {}
+  "mcpServers": {
+    "example-db": {
+      "command": "node",
+      "args": ["./mcp/example-db-server.js"]
+    },
+    "example-linter": {
+      "command": "node",
+      "args": ["./mcp/example-linter-server.js"]
+    }
+  }
 }
 ```
