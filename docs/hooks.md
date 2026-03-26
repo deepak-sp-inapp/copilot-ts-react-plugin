@@ -142,10 +142,12 @@ After Copilot edits a `.ts` or `.tsx` file, runs `tsc --noEmit` to check for Typ
 
 | Field | Value |
 |-------|-------|
-| **Trigger** | Session start (lifecycle hook) |
-| **Behavior** | Injects project context |
+| **Trigger** | Not currently auto-wired (example lifecycle script) |
+| **Behavior** | Injects project context when run manually or by a future session-start hook |
 
-At the start of each session, detects and reports the project's technology stack so Copilot has accurate context from the first message.
+This script is not registered in `hooks/hooks.json` and does **not** run automatically. It is provided as an example of a session-start script you can call manually (for example, from your shell or editor) or wire up yourself if your environment adds support for session-start lifecycle hooks.
+
+When run, it detects and reports the project's technology stack so Copilot has accurate context from the first message.
 
 **Detects:**
 - **Package manager** — pnpm, yarn, or npm (via lockfile detection)

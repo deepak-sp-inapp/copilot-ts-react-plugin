@@ -2,22 +2,22 @@
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@2026.1.14", "."],
       "description": "Filesystem access for all agents — reads existing components before generating, writes new files, explores project structure"
     },
     "memory": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "args": ["-y", "@modelcontextprotocol/server-memory@2026.1.26"],
       "description": "Persistent memory — stores React/TypeScript component patterns, naming conventions, and team decisions across sessions"
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@2025.12.18"],
       "description": "Chain-of-thought reasoning — used by planner and architect agents before writing code"
     },
     "context7": {
       "command": "npx",
-      "args": ["-y", "@context7/mcp-server"],
+      "args": ["-y", "@upstash/context7-mcp@2.1.4"],
       "description": "Live documentation lookup — fetches up-to-date React, TypeScript, Vite, Next.js, and ecosystem library docs on demand"
     },
     "insaits": {
