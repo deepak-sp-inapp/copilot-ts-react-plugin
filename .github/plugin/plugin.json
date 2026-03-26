@@ -1,7 +1,7 @@
 {
   "name": "copilot-ts-react-plugin",
   "version": "1.0.0",
-  "description": "System-level Frontend Optimization Harness for React TypeScript with Antd, PrimeReact, and Bootstrap. Provides custom agents, skills, hooks, and instructions to enhance GitHub Copilot for React development.",
+  "description": "System-level Frontend Optimization Harness for React TypeScript. Provides custom agents, skills, hooks, and instructions to enhance GitHub Copilot for React development.",
   "components": {
     "instructions": [
       "instructions/typescript/coding-style.md",
@@ -9,13 +9,15 @@
       "instructions/typescript/patterns.md",
       "instructions/typescript/security.md",
       "instructions/typescript/testing.md",
+      "instructions/common/agents.md",
       "instructions/common/coding-style.md",
       "instructions/common/development-workflow.md",
       "instructions/common/git-workflow.md",
-      "instructions/common/security.md",
-      "instructions/common/testing.md",
+      "instructions/common/hooks.md",
+      "instructions/common/patterns.md",
       "instructions/common/performance.md",
-      "instructions/common/patterns.md"
+      "instructions/common/security.md",
+      "instructions/common/testing.md"
     ],
     "agents": [
       "agents/architect.agent.md",
@@ -27,7 +29,10 @@
       "agents/tdd-guide.agent.md"
     ],
     "skills": [
-      "skills/frontend-patterns/SKILL.md"
+      "skills/frontend-patterns/SKILL.md",
+      "skills/security-review/SKILL.md",
+      "skills/security-scan/SKILL.md",
+      "skills/tdd-workflow/SKILL.md"
     ],
     "hooks": "hooks/hooks.json"
   }

@@ -20,21 +20,10 @@ fi
 
 # Framework detection from package.json
 if [ -f "$PROJECT_ROOT/package.json" ]; then
-  if grep -q '"next"' package.json 2>/dev/null; then
+  if grep -q '"next"' "$PROJECT_ROOT/package.json" 2>/dev/null; then
     echo "Framework: Next.js"
-  elif grep -q '"react"' package.json 2>/dev/null; then
+  elif grep -q '"react"' "$PROJECT_ROOT/package.json" 2>/dev/null; then
     echo "Framework: React"
-  fi
-
-  # UI library detection
-  if grep -q '"antd"' package.json 2>/dev/null; then
-    echo "UI Library: Ant Design (antd)"
-  fi
-  if grep -q '"primereact"' package.json 2>/dev/null; then
-    echo "UI Library: PrimeReact"
-  fi
-  if grep -q '"bootstrap"' package.json 2>/dev/null; then
-    echo "UI Library: Bootstrap"
   fi
 fi
 

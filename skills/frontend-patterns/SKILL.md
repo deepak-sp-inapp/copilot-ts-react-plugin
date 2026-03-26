@@ -1,6 +1,6 @@
 ---
 name: frontend-patterns
-description: Frontend development patterns for React TypeScript with Antd, PrimeReact, and Bootstrap. Covers component composition, state management, custom hooks, performance optimization, form handling, and accessibility.
+description: Frontend development patterns for React TypeScript. Covers component composition, state management, custom hooks, performance optimization, form handling, and accessibility.
 version: "1.0.0"
 triggers:
   - "react component"
@@ -8,9 +8,6 @@ triggers:
   - "performance optimization"
   - "custom hook"
   - "form validation"
-  - "antd"
-  - "primereact"
-  - "bootstrap"
 ---
 
 # Frontend Development Patterns
